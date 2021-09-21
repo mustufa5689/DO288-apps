@@ -14,11 +14,11 @@ echo "---> Installing application source"
 cp -Rf /tmp/src/*.html ./
 
 #DATE=`date "+%b %d, %Y @ %H:%M %p"`
-DATE=`date "+%F"`
+DATE=`date +"%F"`
 echo "---> Creating info page"
 echo "Page built on $DATE" >> ./info.html
 #echo "Proudly served by Apache HTTP Server version $HTTPD_VERSION" >> ./info.html
-echo "$DATE Hi Hello World!!!, Mustufa Mithaiwala" >> ./info.html
+echo "$DATE Hi Hello World!!!, Mustufa Mithaiwala, Today is your EXAM, ALL the BEST" >> ./info.html
 ######## CUSTOMIZATION ENDS HERE ############
 
 if [ -d ./httpd-cfg ]; then
