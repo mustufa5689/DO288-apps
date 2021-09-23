@@ -18,7 +18,7 @@ DATE=`date "+%F"`
 echo "---> Creating info page"
 echo "Page built on $DATE" >> ./info.html
 #echo "Proudly served by Apache HTTP Server version $HTTPD_VERSION" >> ./info.html
-echo "$DATE Hi, Mustufa Mithaiwala, Today on $(DATE) is your EXAM at 23:45 PM IST, ALL the BEST" >> ./info.html
+echo "$DATE Hi, Mustufa Mithaiwala, Today on $DATE is your EXAM at 23:45 PM IST, ALL the BEST" >> ./info.html
 ######## CUSTOMIZATION ENDS HERE ############
 
 if [ -d ./httpd-cfg ]; then
