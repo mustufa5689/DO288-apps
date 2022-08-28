@@ -2,7 +2,7 @@ apiVersion: template.openshift.io/v1
 kind: Template
 labels:
   app: php-app
-  template: php-app
+  template: ex288-php
 message: |-
   The following service(s) have been created in your project: ${NAME}, ${DATABASE_SERVICE_NAME}.
 
@@ -56,8 +56,8 @@ metadata:
     manager: cluster-samples-operator
     operation: Update
     time: "2021-07-14T17:35:27Z"
-  name: ex288-php-mysql
-  namespace: template
+  name: ex288-php-app
+  namespace: indy
   resourceVersion: "19733"
   uid: 5c7a9bdc-bf90-4b86-bdbf-21c273ef241e
 objects:
@@ -110,7 +110,7 @@ objects:
     output:
       to:
         kind: ImageStreamTag
-        name: ${NAME}:latest
+        name: 'php:latest'
     postCommit:
       script: ./vendor/bin/phpunit
     source:
@@ -176,6 +176,8 @@ objects:
                 name: ${NAME}
           - name: HELLO_MESSAGE
             value: ${HELLO_MESSAGE}
+          - name: HELLO_AUDIENCE
+            value: ${HELLO_AUDIENCE}
           - name: DATABASE_PASSWORD
             valueFrom:
               secretKeyRef:
@@ -193,7 +195,7 @@ objects:
                 name: ${NAME}
           - name: OPCACHE_REVALIDATE_FREQ
             value: ${OPCACHE_REVALIDATE_FREQ}
-          image: ' '
+          image: 'php:latest'
           livenessProbe:
             httpGet:
               path: /health.php
@@ -272,7 +274,7 @@ objects:
             value: ${DATABASE_NAME}
           - name: MYSQL_DEFAULT_AUTHENTICATION_PLUGIN
             value: ${MYSQL_DEFAULT_AUTHENTICATION_PLUGIN}
-          image: ' '
+          image: 'mysql:latest'
           livenessProbe:
             initialDelaySeconds: 30
             tcpSocket:
@@ -345,7 +347,7 @@ parameters:
   displayName: Git Repository URL
   name: SOURCE_REPOSITORY_URL
   required: true
-  value: https://github.com/sclorg/cakephp-ex.git
+  value: http://git.domain16.example.com/ex288/php-app.git
 - description: Set this to a branch name, tag or other ref of your repository if you are not using the default branch.
   displayName: Git Reference
   name: SOURCE_REPOSITORY_REF
@@ -355,6 +357,7 @@ parameters:
 - description: The exposed hostname that will route to the CakePHP service, if left blank a value will be defaulted.
   displayName: Application Hostname
   name: APPLICATION_DOMAIN
+  #value: XYZ.domain16.example.com
   required: true
 - description: Github trigger secret.  A difficult to guess string encoded as part of the webhook URL.  Not encrypted.
   displayName: GitHub Webhook Secret
@@ -406,4 +409,4 @@ parameters:
 - name: HELLO_MESSAGE
   value: Benjour
 - name: HELLO_AUDIENCE
-  value: Engineers!!
+  value: Engineers!
